@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jotto | Code Breaking Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app-container">
+        
+        <!-- Start Screen -->
+        <div id="start-screen" class="screen active">
+            <h1>JOTTO</h1>
+            <p>The logic deduction game.</p>
+            <div class="instructions">
+                <h3>How to Play</h3>
+                <ol>
+                    <li>Think of a 5-letter word (no repeating letters).</li>
+                    <li>The Computer will also think of a secret word.</li>
+                    <li>Take turns guessing.</li>
+                    <li><strong>Score 0-5</strong> based on how many letters match (position doesn't matter).</li>
+                    <li>First to deduce the opponent's word wins!</li>
+                </ol>
+            </div>
+            <button id="start-btn" class="primary-btn">Start Game</button>
+        </div>
+
+        <!-- Game Screen (Split View) -->
+        <div id="game-screen" class="screen">
+            <header>
+                <h2>JOTTO</h2>
+            </header>
+            
+            <main class="game-board">
+                
+                <!-- Left Panel: User Scratchpad -->
+                <section class="panel user-panel">
+                    <div class="panel-header">
+                        <h3>Your Guesses</h3>
+                        <small>Trying to find Computer's word</small>
+                    </div>
+
+                    <div class="input-area">
+                        <input type="text" id="user-guess-input" maxlength="5" placeholder="ENTER GUESS">
+                        <button id="user-guess-btn">GUESS</button>
+                    </div>
+
+                    <ul id="user-guess-list" class="guess-log">
+                        <!-- User guesses go here -->
+                    </ul>
+
+                    <div class="alphabet-chart" id="alphabet-chart">
+                        <!-- Generated A-Z -->
+                        <div class="key">A</div><div class="key">B</div><div class="key">C</div><div class="key">D</div>
+                        <div class="key">E</div><div class="key">F</div><div class="key">G</div><div class="key">H</div>
+                        <div class="key">I</div><div class="key">J</div><div class="key">K</div><div class="key">L</div>
+                        <div class="key">M</div><div class="key">N</div><div class="key">O</div><div class="key">P</div>
+                        <div class="key">Q</div><div class="key">R</div><div class="key">S</div><div class="key">T</div>
+                        <div class="key">U</div><div class="key">V</div><div class="key">W</div><div class="key">X</div>
+                        <div class="key">Y</div><div class="key">Z</div>
+                    </div>
+                </section>
+
+                <!-- Right Panel: Computer Status -->
+                <section class="panel computer-panel">
+                    <div class="panel-header">
+                        <h3>Computer Board</h3>
+                        <small>Computer guessing YOUR word</small>
+                    </div>
+
+                    <div class="computer-status">
+                        <div class="speech-bubble">
+                            <span id="computer-guess-display">...</span>
+                        </div>
+                        <p class="instruction-text">Score the Computer's guess:</p>
+                        <div class="score-controls">
+                            <button class="score-btn" data-score="0">0</button>
+                            <button class="score-btn" data-score="1">1</button>
+                            <button class="score-btn" data-score="2">2</button>
+                            <button class="score-btn" data-score="3">3</button>
+                            <button class="score-btn" data-score="4">4</button>
+                            <button class="score-btn" data-score="5">5</button>
+                        </div>
+                    </div>
+
+                    <ul id="computer-guess-list" class="guess-log">
+                        <!-- Computer guesses go here -->
+                    </ul>
+                </section>
+
+            </main>
+        </div>
+
+        <!-- End Screen -->
+        <div id="end-screen" class="screen">
+            <h1 id="end-message">Game Over</h1>
+            <button id="restart-btn" class="primary-btn">Play Again</button>
+        </div>
+
+    </div>
+
+    <script type="module" src="script.js"></script>
+</body>
+</html>

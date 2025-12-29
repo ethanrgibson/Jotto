@@ -1,0 +1,293 @@
+:root {
+    --bg-color: #0f172a;
+    --panel-bg: #1e293b;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --accent: #06b6d4; /* Cyan */
+    --accent-hover: #0891b2;
+    --border-color: #334155;
+    --chart-eliminated: #334155;
+    --chart-confirmed: #22c55e;
+    --chart-uncertain: #eab308;
+    --font-mono: 'Courier New', Courier, monospace;
+    --font-ui: system-ui, -apple-system, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: var(--font-ui);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.app-container {
+    width: 100%;
+    max-width: 1000px;
+    height: 100%;
+    max-height: 800px;
+    position: relative;
+    padding: 1rem;
+}
+
+/* Screens */
+.screen {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.screen.active {
+    display: flex;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Typography */
+h1 { font-size: 3rem; margin-bottom: 0.5rem; letter-spacing: 4px; color: var(--accent); }
+h2 { font-size: 1.5rem; letter-spacing: 2px; color: var(--text-secondary); }
+h3 { margin-bottom: 0.5rem; color: var(--accent); }
+p { color: var(--text-secondary); line-height: 1.6; }
+
+/* Buttons */
+button {
+    cursor: pointer;
+    font-family: inherit;
+    border: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.primary-btn {
+    background-color: var(--accent);
+    color: var(--bg-color);
+    font-weight: bold;
+    font-size: 1.2rem;
+    padding: 0.8rem 2rem;
+    margin-top: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.primary-btn:hover {
+    background-color: var(--accent-hover);
+    transform: translateY(-2px);
+}
+
+/* Start Screen */
+.instructions {
+    background: var(--panel-bg);
+    padding: 2rem;
+    border-radius: 8px;
+    text-align: left;
+    max-width: 500px;
+    margin: 2rem 0;
+    border: 1px solid var(--border-color);
+}
+.instructions li {
+    margin-bottom: 0.5rem;
+    margin-left: 1.2rem;
+    color: var(--text-secondary);
+}
+
+/* Game Board */
+.game-board {
+    display: flex;
+    gap: 1.5rem;
+    width: 100%;
+    height: 100%;
+    padding-top: 1rem;
+}
+
+.panel {
+    flex: 1;
+    background: var(--panel-bg);
+    border-radius: 8px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.panel-header {
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.guess-log {
+    flex: 1;
+    list-style: none;
+    overflow-y: auto;
+    font-family: var(--font-mono);
+    border: 1px solid var(--border-color); /* Inner border for log */
+    background: rgba(0,0,0,0.2);
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+}
+
+.guess-log li {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.4rem;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 1.1rem;
+}
+
+.guess-log li:last-child { border-bottom: none; }
+.guess-log span.score { color: var(--accent); font-weight: bold; }
+
+/* User Panel Specifics */
+.input-area {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+#user-guess-input {
+    flex: 1;
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 0.8rem;
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    text-align: center;
+    border-radius: 4px;
+}
+
+#user-guess-input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+#user-guess-btn {
+    background: var(--accent);
+    color: var(--bg-color);
+    font-weight: bold;
+    padding: 0 1rem;
+}
+
+#user-guess-btn:disabled {
+    background: var(--border-color);
+    color: var(--text-secondary);
+    cursor: not-allowed;
+}
+
+/* Computer Panel Specifics */
+.computer-status {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.speech-bubble {
+    background: var(--text-primary);
+    color: var(--bg-color);
+    display: inline-block;
+    padding: 0.5rem 1.5rem;
+    border-radius: 20px;
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    min-width: 120px;
+}
+
+.instruction-text {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.score-controls {
+    display: flex;
+    justify-content: center;
+    gap: 0.25rem;
+}
+
+.score-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--border-color);
+    color: var(--text-primary);
+    font-weight: bold;
+}
+
+.score-btn:hover:not(:disabled) {
+    background: var(--accent);
+    color: var(--bg-color);
+}
+
+.score-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Alphabet Chart */
+.alphabet-chart {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    margin-top: auto; /* Push to bottom */
+}
+
+.key {
+    background: var(--border-color);
+    color: var(--text-secondary);
+    text-align: center;
+    padding: 6px 0;
+    font-size: 0.9rem;
+    border-radius: 3px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.key:hover { background: #475569; }
+
+/* Key States */
+.key.eliminated { background: #000; color: #444; text-decoration: line-through; }
+.key.confirmed { background: var(--chart-confirmed); color: #000; font-weight: bold; }
+.key.uncertain { background: var(--chart-uncertain); color: #000; }
+
+
+/* Responsive */
+@media (max-width: 768px) {
+    .game-board {
+        flex-direction: column-reverse; /* Put computer on top on mobile? Or user? */
+    }
+    .panel {
+        height: 50%; /* Initial attempt, may need adjustment */
+    }
+    .game-board {
+        /* On mobile, stack them but let them scroll if needed or use tabs.
+           For now, simple stacking. */
+        display: block;
+        overflow-y: auto;
+    }
+    .panel {
+        margin-bottom: 1rem;
+        height: auto;
+        min-height: 400px;
+    }
+}
