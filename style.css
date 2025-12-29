@@ -3,7 +3,8 @@
     --panel-bg: #1e293b;
     --text-primary: #f8fafc;
     --text-secondary: #94a3b8;
-    --accent: #06b6d4; /* Cyan */
+    --accent: #06b6d4;
+    /* Cyan */
     --accent-hover: #0891b2;
     --border-color: #334155;
     --chart-eliminated: #334155;
@@ -56,15 +57,40 @@ body {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Typography */
-h1 { font-size: 3rem; margin-bottom: 0.5rem; letter-spacing: 4px; color: var(--accent); }
-h2 { font-size: 1.5rem; letter-spacing: 2px; color: var(--text-secondary); }
-h3 { margin-bottom: 0.5rem; color: var(--accent); }
-p { color: var(--text-secondary); line-height: 1.6; }
+h1 {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 4px;
+    color: var(--accent);
+}
+
+h2 {
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    color: var(--text-secondary);
+}
+
+h3 {
+    margin-bottom: 0.5rem;
+    color: var(--accent);
+}
+
+p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
 
 /* Buttons */
 button {
@@ -101,6 +127,7 @@ button {
     margin: 2rem 0;
     border: 1px solid var(--border-color);
 }
+
 .instructions li {
     margin-bottom: 0.5rem;
     margin-left: 1.2rem;
@@ -139,8 +166,9 @@ button {
     list-style: none;
     overflow-y: auto;
     font-family: var(--font-mono);
-    border: 1px solid var(--border-color); /* Inner border for log */
-    background: rgba(0,0,0,0.2);
+    border: 1px solid var(--border-color);
+    /* Inner border for log */
+    background: rgba(0, 0, 0, 0.2);
     padding: 0.5rem;
     margin-bottom: 1rem;
     border-radius: 4px;
@@ -150,12 +178,18 @@ button {
     display: flex;
     justify-content: space-between;
     padding: 0.4rem;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     font-size: 1.1rem;
 }
 
-.guess-log li:last-child { border-bottom: none; }
-.guess-log span.score { color: var(--accent); font-weight: bold; }
+.guess-log li:last-child {
+    border-bottom: none;
+}
+
+.guess-log span.score {
+    color: var(--accent);
+    font-weight: bold;
+}
 
 /* User Panel Specifics */
 .input-area {
@@ -245,11 +279,69 @@ button {
 }
 
 /* Alphabet Chart */
+/* Alphabet Chart Section */
+.chart-section {
+    margin-top: auto;
+    display: flex;
+    gap: 1rem;
+    border-top: 1px solid var(--border-color);
+    padding-top: 1rem;
+}
+
+.chart-help {
+    flex: 0 0 140px;
+    /* Fixed width for help text */
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.chart-help h4 {
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.chart-help ul {
+    list-style: none;
+    margin-top: 0.5rem;
+}
+
+.chart-help li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.25rem;
+    font-size: 0.75rem;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.dot.eliminated {
+    background: #444;
+    border: 1px solid #666;
+}
+
+.dot.confirmed {
+    background: var(--chart-confirmed);
+}
+
+.dot.uncertain {
+    background: var(--chart-uncertain);
+}
+
 .alphabet-chart {
+    flex: 1;
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 4px;
-    margin-top: auto; /* Push to bottom */
 }
 
 .key {
@@ -263,31 +355,67 @@ button {
     user-select: none;
 }
 
-.key:hover { background: #475569; }
+.key:hover {
+    background: #475569;
+}
 
 /* Key States */
-.key.eliminated { background: #000; color: #444; text-decoration: line-through; }
-.key.confirmed { background: var(--chart-confirmed); color: #000; font-weight: bold; }
-.key.uncertain { background: var(--chart-uncertain); color: #000; }
+.key.eliminated {
+    background: #000;
+    color: #444;
+    text-decoration: line-through;
+}
+
+.key.confirmed {
+    background: var(--chart-confirmed);
+    color: #000;
+    font-weight: bold;
+}
+
+.key.uncertain {
+    background: var(--chart-uncertain);
+    color: #000;
+}
 
 
 /* Responsive */
 @media (max-width: 768px) {
     .game-board {
-        flex-direction: column-reverse; /* Put computer on top on mobile? Or user? */
+        flex-direction: column-reverse;
+        /* Put computer on top on mobile? Or user? */
     }
+
     .panel {
-        height: 50%; /* Initial attempt, may need adjustment */
+        height: 50%;
+        /* Initial attempt, may need adjustment */
     }
+
     .game-board {
         /* On mobile, stack them but let them scroll if needed or use tabs.
            For now, simple stacking. */
         display: block;
         overflow-y: auto;
     }
+
     .panel {
         margin-bottom: 1rem;
         height: auto;
         min-height: 400px;
+    }
+
+    .chart-section {
+        flex-direction: column;
+    }
+
+    .chart-help {
+        flex: auto;
+        margin-bottom: 0.5rem;
+        text-align: center;
+    }
+
+    .chart-help ul {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
     }
 }
